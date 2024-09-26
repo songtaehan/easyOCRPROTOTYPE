@@ -28,3 +28,7 @@ for i in result:
 plt.figure(figsize=(20,12))
 plt.imshow(image)
 plt.show()
+
+
+
+#Reference site https://velog.io/@bokyungkim/EasyOCR%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%B4-%ED%8B%B0%EC%BC%93-%EC%86%8D-%EB%AC%B8%EC%9E%90%EB%A5%BC-%ED%85%8D%EC%8A%A4%ED%8A%B8%ED%99%94-%ED%95%B4%EB%B3%B4%EC%9E%90
