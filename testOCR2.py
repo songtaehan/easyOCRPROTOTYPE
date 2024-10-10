@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 print(dir(easyocr))
-image_file = cv2.imread('sol.jpg')
+image_file = cv2.imread('cocoa.jpg')
 
 if image_file is None:
     print("Error loading image")
@@ -34,6 +34,7 @@ info5 = list()
 info6 = list()
 info7 = list()
 info8 = list()
+info9 = list()
 
 info1 = [go for go in split_result if 'kcal' in go ]
 info2 = [go for go in split_result if '나트륨' in go ]
@@ -43,7 +44,8 @@ info5 = [go for go in split_result if '지방' in go ]
 info6 = [go for go in split_result if '포화지방' in go ]
 info7 = [go for go in split_result if '콜레스테롤' in go ]
 info8 = [go for go in split_result if '단백질' in go]
-info8 = [go for go in split_result if '탄백질' in go]
+info9 = [go for go in split_result if '탄백질' in go]
+
 print("-------------1")
 print(info1)
 print(info2)
@@ -53,10 +55,10 @@ print(info5)
 print(info6)
 print(info7)
 print(info8)
-
+print(info9)
 data = list()
 totalinfo = list()
-totalinfo = info1 + info2 + info3 + info4 + info5 + info6 + info7 + info8  
+totalinfo = info1 + info2 + info3 + info4 + info5 + info6 + info7 + info8 + info9
 print("------------------2")
 print(totalinfo)
 
