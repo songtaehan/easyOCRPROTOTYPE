@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 print(dir(easyocr))
-image_file = cv2.imread('cocoa.jpg')
+image_file = cv2.imread('sol.jpg')
 
 if image_file is None:
     print("Error loading image")
@@ -42,7 +42,8 @@ info4 = [go for go in split_result if '당류' in go ]
 info5 = [go for go in split_result if '지방' in go ]
 info6 = [go for go in split_result if '포화지방' in go ]
 info7 = [go for go in split_result if '콜레스테롤' in go ]
-info8 = [go for go in split_result if '단백질' in go ]
+info8 = [go for go in split_result if '단백질' in go]
+info8 = [go for go in split_result if '탄백질' in go]
 print("-------------1")
 print(info1)
 print(info2)
@@ -66,18 +67,20 @@ for i in range(len(totalinfo)):
         pass
     elif totalinfo[i][1] == 'kcal':
         print(totalinfo[i][0] + "_kcal")
+    elif totalinfo[i][0] == '탄수화물':
+        print(totalinfo[i][1] + "_탄수화물")
+    elif totalinfo[i][0] == '당류':
+        print(totalinfo[i][1] + "_당류")
+    elif totalinfo[i][0] == '지방':
+        print(totalinfo[i][1] + "_지방")
+    elif totalinfo[i][0] == '포화지방':
+        print(totalinfo[i][1] + "_포화지방")
+    elif totalinfo[i][0] == '단백질':
+        print(totalinfo[i][1] + "_단백질")
+    elif totalinfo[i][0] == '탄백질':
+        print(totalinfo[i][1] + "_단백질")
     else:
-        if totalinfo[i][0] == '탄수화물':
-            print(totalinfo[i][1] + "_탄수화물")
-        if totalinfo[i][0] == '당류':
-            print(totalinfo[i][1] + "_당류")
-        if totalinfo[i][0] == '지방':
-            print(totalinfo[i][1] + "_지방")
-        if totalinfo[i][0] == '포화지방':
-            print(totalinfo[i][1] + "_포화지방")
-        if totalinfo[i][0] == '단백질':
-            print(totalinfo[i][1] + "_단백질")
-        
+        pass   
     
 
 
