@@ -60,14 +60,25 @@ print("------------------2")
 print(totalinfo)
 
 print("------------------3")
+print("데이터 추출 완료")
 for i in range(len(totalinfo)):
     if totalinfo is None:
         pass
     elif totalinfo[i][1] == 'kcal':
-        print(totalinfo[i][0])
-    else:    
-        print(totalinfo[i][1])
+        print(totalinfo[i][0] + "_kcal")
+    else:
+        if totalinfo[i][0] == '탄수화물':
+            print(totalinfo[i][1] + "_탄수화물")
+        if totalinfo[i][0] == '당류':
+            print(totalinfo[i][1] + "_당류")
+        if totalinfo[i][0] == '지방':
+            print(totalinfo[i][1] + "_지방")
+        if totalinfo[i][0] == '포화지방':
+            print(totalinfo[i][1] + "_포화지방")
+        if totalinfo[i][0] == '단백질':
+            print(totalinfo[i][1] + "_단백질")
+        
     
-print("데이터 추출 완료")
+
 
 
