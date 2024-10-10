@@ -1,12 +1,27 @@
 import easyocr
+import cv2
+import numpy as np
+
 print(dir(easyocr))
+image_file = cv2.imread('cocoa.jpg')
+
+if image_file is None:
+    print("Error loading image")
+else:
+    resized_img = cv2.resize(image_file, dsize=(3000, 2500), interpolation=cv2.INTER_LINEAR)
+    print("Image resized successfully")
+
+
 reader = easyocr.Reader(['ko','en'],gpu = True)
-result = reader.readtext("cocoa.jpg", detail = 0)
+result = reader.readtext(resized_img, detail = 0)
 print(result)
+
 new_result = [i.replace(' ','') for i in result]
 print(new_result)
+
 split_result = [i.split() for i in result]
 print(split_result)
+
 go = list()
 info1 = list()
 info2 = list()
