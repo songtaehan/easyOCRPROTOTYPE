@@ -35,6 +35,7 @@ info6 = list()
 info7 = list()
 info8 = list()
 info9 = list()
+info10 = list()
 
 info1 = [go for go in split_result if 'kcal' in go ]
 info2 = [go for go in split_result if '나트륨' in go ]
@@ -45,7 +46,7 @@ info6 = [go for go in split_result if '포화지방' in go ]
 info7 = [go for go in split_result if '콜레스테롤' in go ]
 info8 = [go for go in split_result if '단백질' in go]
 info9 = [go for go in split_result if '탄백질' in go]
-
+info10 = [go for go in split_result if '프화지방' in go]
 print("-------------1")
 print(info1)
 print(info2)
@@ -56,9 +57,10 @@ print(info6)
 print(info7)
 print(info8)
 print(info9)
+print(info10)
 data = list()
 totalinfo = list()
-totalinfo = info1 + info2 + info3 + info4 + info5 + info6 + info7 + info8 + info9
+totalinfo = info1 + info2 + info3 + info4 + info5 + info6 + info7 + info8 + info9 + info10
 print("------------------2")
 print(totalinfo)
 
@@ -76,6 +78,8 @@ for i in range(len(totalinfo)):
     elif totalinfo[i][0] == '지방':
         print(totalinfo[i][1] + "_지방")
     elif totalinfo[i][0] == '포화지방':
+        print(totalinfo[i][1] + "_포화지방")
+    elif totalinfo[i][0] == '프화지방':
         print(totalinfo[i][1] + "_포화지방")
     elif totalinfo[i][0] == '단백질':
         print(totalinfo[i][1] + "_단백질")
