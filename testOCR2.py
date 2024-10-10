@@ -14,12 +14,15 @@ else:
 
 reader = easyocr.Reader(['ko','en'],gpu = True)
 result = reader.readtext(resized_img, detail = 0)
+print("-----------result")
 print(result)
 
-new_result = [i.replace(' ','') for i in result]
-print(new_result)
+#new_result = [i.replace(' ','') for i in result]
+#print("----------new_result")
+#print(new_result)
 
 split_result = [i.split() for i in result]
+print("----------split_result")
 print(split_result)
 
 go = list()
@@ -40,6 +43,7 @@ info5 = [go for go in split_result if '지방' in go ]
 info6 = [go for go in split_result if '포화지방' in go ]
 info7 = [go for go in split_result if '콜레스테롤' in go ]
 info8 = [go for go in split_result if '단백질' in go ]
+print("-------------1")
 print(info1)
 print(info2)
 print(info3)
@@ -49,39 +53,21 @@ print(info6)
 print(info7)
 print(info8)
 
-
+data = list()
 totalinfo = list()
 totalinfo = info1 + info2 + info3 + info4 + info5 + info6 + info7 + info8  
+print("------------------2")
 print(totalinfo)
 
-
-print(totalinfo[0][0])
-print(totalinfo[1][1])
-print(totalinfo[2][1])
-print(totalinfo[3][1])
-print(totalinfo[4][1])
-print(totalinfo[5][1])
-
-
-data0 = totalinfo[0][0]
-data1 = totalinfo[1][1]
-data2 = totalinfo[2][1]
-data3 = totalinfo[3][1]
-data4 = totalinfo[4][1]
-data5 = totalinfo[5][1]
-
-
-data1 = data1[:-1]
-data2 = data2[:-1]
-data3 = data3[:-1]
-data4 = data4[:-1]
-data5 = data5[:-1]
-
-print("----------------------")
+print("------------------3")
+for i in range(len(totalinfo)):
+    if totalinfo is None:
+        pass
+    elif totalinfo[i][1] == 'kcal':
+        print(totalinfo[i][0])
+    else:    
+        print(totalinfo[i][1])
+    
 print("데이터 추출 완료")
-print(data0) #kcal
-print(data1) #탄수화물
-print(data2) #당류
-print(data3) #지방
-print(data4) #포화지방
-print(data5) #단백질
+
+
