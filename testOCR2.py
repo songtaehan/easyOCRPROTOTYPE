@@ -2,7 +2,7 @@ import easyocr
 import cv2
 import numpy as np
 
-print(dir(easyocr))
+#print(dir(easyocr))
 image_file = cv2.imread('cocoa.jpg')
 
 if image_file is None:
@@ -12,7 +12,7 @@ else:
     print("Image resized successfully")
 
 
-reader = easyocr.Reader(['ko','en'],gpu = True)
+reader = easyocr.Reader(['ko','en'],gpu = False)
 result = reader.readtext(resized_img, detail = 0)
 print("-----------result")
 print(result)
@@ -69,8 +69,6 @@ print("데이터 추출 완료")
 for i in range(len(totalinfo)):
     if totalinfo is None:
         pass
-    elif totalinfo[i][1] == 'kcal':
-        print(totalinfo[i][0] + "_kcal")
     elif totalinfo[i][0] == '탄수화물':
         print(totalinfo[i][1] + "_탄수화물")
     elif totalinfo[i][0] == '당류':
@@ -85,6 +83,10 @@ for i in range(len(totalinfo)):
         print(totalinfo[i][1] + "_단백질")
     elif totalinfo[i][0] == '탄백질':
         print(totalinfo[i][1] + "_단백질")
+    elif totalinfo[i][1] == 'kcal':
+        print(totalinfo[i][0] + "_kcal")
+    elif totalinfo[i][2] == 'kcal':
+        print(totalinfo[i][1] + "_kcal")
     else:
         pass   
     
