@@ -2,13 +2,14 @@ import cv2
 import base64
 import json
 import requests
+import re
 
 # API URL 및 키 설정
-api_url = ''
+api_url =''
 api_key = ''  # 네이버 클로바에서 받은 API 키
 
 # 이미지 파일 경로 설정
-image_file_path = r'C:\Users\user\Desktop\easyOCR\cocoa.jpg'
+image_file_path = r'C:\Users\user\Desktop\easyOCR\36.jpg'
 output_file_path = r'C:\Users\user\Desktop\easyOCR\ocr_results.txt'  # 결과를 저장할 파일 경로
 
 # 헤더 설정
@@ -57,9 +58,15 @@ if response.status_code == 200:
     ocr_result = response.json()
     
     if 'images' in ocr_result:
-        # 결과를 파일에 저장
+        # 추출된 텍스트 저장
+        text_result = ""
+        for image in ocr_result['images']:
+            for field in image['fields']:
+                text_result += field['inferText'] + "\n"
+        
+        # 문자열로 저장
         with open(output_file_path, 'w', encoding='utf-8') as f:
-            json.dump(ocr_result, f, ensure_ascii=False, indent=4)
+            f.write(text_result)
         print(f'Results saved to {output_file_path}')
     else:
         print('OCR result does not contain expected data.')
@@ -71,12 +78,32 @@ else:
 # 저장된 결과를 파일에서 읽고 출력
 try:
     with open(output_file_path, 'r', encoding='utf-8') as f:
-        saved_results = json.load(f)
+        saved_results = f.read()
         print('Saved OCR Results:')
-        print(json.dumps(saved_results, ensure_ascii=False, indent=4))
+        print(saved_results)
 except FileNotFoundError:
     print(f'File not found: {output_file_path}')
-except json.JSONDecodeError:
-    print('Error decoding JSON from file.')
 except Exception as e:
     print(f'Error reading file: {e}')
+
+
+ocr_text = text_result
+
+# 추출할 키워드
+keywords = ['kcal', '나트륨', '탄수화물', '당류', '지방', '트랜스지방', '포화지방', '콜레스테롤', '단백질']
+
+# 데이터 추출을 위한 정규 표현식 패턴
+pattern = re.compile(r'(\w+)\s*([\d\.]+)\s*(kcal|mg|g)')
+
+# 결과 저장
+results = {}
+
+# OCR 텍스트에서 데이터 추출
+for match in pattern.finditer(ocr_text):
+    label, value, unit = match.groups()
+    if label in keywords:
+        results[label] = f"{value} {unit}"
+
+# 결과 출력
+for key, value in results.items():
+    print(f"{key}: {value}")
